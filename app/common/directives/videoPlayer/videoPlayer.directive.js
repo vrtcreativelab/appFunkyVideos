@@ -30,11 +30,11 @@ class VideoPlayerDirectiveController {
                                 end: 100000
                             },
                             onComplete: function onComplete(currentTime, timeLapse, params) {
-                                console.log('end of loop');
+
                                 that.videogular.api.seekTime(timeLapse.start);
                             },
                             onUpdate: function onUpdate(currentTime, timeLapse, params) {
-                                console.log(currentTime, timeLapse);
+
                             }
                         }]
                     },
@@ -46,23 +46,22 @@ class VideoPlayerDirectiveController {
             }
         }, true);
 
-
         $scope.$watch('vm.start', (value) => {
             if (value) {
                 this.config.cuePoints.timePoint[0].timeLapse.start = value;
-                console.log(this.config);
+
             } else {}
         }, true);
 
         $scope.$watch('vm.end', (value) => {
             if (value) {
-                console.log(value);
+
                 this.config.cuePoints.timePoint[0].timeLapse.end = value;
                 this.config.cuePoints.timePoint[0].onComplete = function onComplete(currentTime, timeLapse, params) {
                     console.log('end of loop');
                     that.videogular.api.seekTime(timeLapse.start);
                 }
-                console.log(this.config);
+
             } else {}
         }, true);
 

@@ -8,8 +8,9 @@ export default class SubtitlesController {
         this.srtObj = {};
         this.videogular = videogular;
         this.subtitle = {
-            video: 'videos/am1.mov'
+            video: 'http://static.videogular.com/assets/videos/videogular.mp4'
         };
+        this.currentTime = '';
         const that = this;
 
         this.slider = {
@@ -37,7 +38,7 @@ export default class SubtitlesController {
     srcChanged() {
         console.log('srcChanged', this);
 
-
+        this.currentTime = this.videogular.api.currentTime / 1000.0;
         this.form = {
             start: 0,
             end: this.videogular.api.totalTime / 1000,
@@ -74,7 +75,7 @@ export default class SubtitlesController {
     }
 
     addLine(obj) {
-        this.totalTime = this.videogular.api.currentTime / 1000.0;
+        // this.totalTime = this.videogular.api.currentTime / 1000.0;
         var id = Object.keys(this.srtObj).length++;
         this.srtObj[id] = { id: id, start: obj.start, end: obj.end, text: obj.text };
     }
