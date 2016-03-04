@@ -1,5 +1,5 @@
 export default class SubtitlesController {
-    constructor($log, srt, FileSaver, $sce, $scope, videogular, $mdDialog) {
+    constructor($log, srt, FileSaver, $sce, $scope, videogular, hotkeys) {
         this.$log = $log;
         this.$sce = $sce;
         this.srt = srt;
@@ -7,7 +7,7 @@ export default class SubtitlesController {
         this.FileSaver = FileSaver;
         this.srtObj = {};
         this.videogular = videogular;
-        this.dialog = $mdDialog;
+        this.hotkeys = hotkeys;
         this.subtitle = {
             video: 'http://static.videogular.com/assets/videos/videogular.mp4'
         };
@@ -33,30 +33,46 @@ export default class SubtitlesController {
             that.form.start = modelValue;
             that.form.end = highValue;
         });
+
+        hotkeys.add({
+            combo: 'i',
+            description: 'getInTime',
+            callback: function() {
+                that.setIn();
+            }
+        });
+
+        hotkeys.add({
+            combo: 'o',
+            description: 'getOutTime',
+            callback: function() {
+                that.setOut();
+            }
+        });
+
+
+        hotkeys.add({
+            combo: 'p',
+            description: 'addLine',
+            callback: function() {
+                that.addLine(that.form);
+            }
+        });
+
+        hotkeys.add({
+            combo: 'space',
+            description: 'startVideo',
+            callback: function() {
+                that.startVideo();
+            }
+        });
+
+
     }
 
 
     deleteLine(ev, line) {
-
-            delete this.srtObj[0];
-
-        // var confirm = this.dialog.confirm()
-        //     .title('Would you like to delete your debt?')
-        //     .textContent('All of the banks have agreed to forgive you your debts.')
-        //     .ariaLabel('Lucky day')
-        //     .targetEvent(ev)
-        //     .ok('Please do it!')
-        //     .cancel('Sounds like a scam');
-        // this.dialog.show(confirm).then(function() {
-        //     delete this.srtObj[0];
-        // }, function() {
-        //     $scope.status = 'You decided to keep your debt.';
-        // });
-
-
-
-
-
+        delete this.srtObj[0];
     }
 
 
@@ -112,6 +128,13 @@ export default class SubtitlesController {
     }
 
 
+    startVideo(id, start, end) {
+
+        this.videogular.api.playPause();
+    }
+
+
+
     setIn() {
         this.form.start = this.videogular.api.currentTime / 1000.0;
     }
@@ -125,25 +148,10 @@ export default class SubtitlesController {
 
 
 
-    // hotkeys.add({
-    //     combo: 'ctrl+i',
-    //     description: 'getInTime',
-    //     callback: function() {
-    //         setIn();
-    //     }
-    // });
-
-    // hotkeys.add({
-    //     combo: 'ctrl+o',
-    //     description: 'getOutTime',
-    //     callback: function() {
-    //         setOut();
-    //     }
-    // });
 
 
 
 
 }
 
-SubtitlesController.$inject = ['$log', 'srt', 'FileSaver', '$sce', '$scope', 'videogular', '$mdDialog'];
+SubtitlesController.$inject = ['$log', 'srt', 'FileSaver', '$sce', '$scope', 'videogular', 'hotkeys'];

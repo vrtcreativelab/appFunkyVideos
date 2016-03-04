@@ -9,6 +9,7 @@ import 'videogular';
 import 'videogular-controls';
 import 'angular-file-upload';
 import imageCropper from 'angular-image-cropper';
+import 'angular-hotkeys';
 
 
 
@@ -29,6 +30,7 @@ export default angular
         'rzModule',
         'com.2fdevs.videogular',
         'com.2fdevs.videogular.plugins.controls',
+        'cfp.hotkeys',
         imageCropper,
         // application
         components,
