@@ -4,11 +4,10 @@
 import template from './subtitleLine.directive.html';
 
 class subtitleLineDirectiveController {
-    constructor($scope, $log, $element, videogular) {
+    constructor($scope, $log, $element) {
         this.$log = $log;
         this.$element = $element;
         this.$scope = $scope;
-        this.videogular = videogular;
         const that = this;
         this.slider = {
 
@@ -16,7 +15,7 @@ class subtitleLineDirectiveController {
             options: {
                 id: this.key,
                 floor: 0,
-                ceil: this.videogular.api.totalTime / 1000,
+                ceil: this.totalTime / 1000,
                 step: 0.001,
                 precision: 10,
                 draggableRange: true,
@@ -41,9 +40,10 @@ export const subtitleLineDirective = function() {
             key: '=',
             in : '=',
             out: '=',
-            text: '='
+            text: '=',
+            totalTime: '='
         },
     };
 };
 
-subtitleLineDirectiveController.$inject = ['$scope', '$log', '$element', 'videogular'];
+subtitleLineDirectiveController.$inject = ['$scope', '$log', '$element'];
