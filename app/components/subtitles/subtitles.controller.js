@@ -1,5 +1,5 @@
 export default class SubtitlesController {
-    constructor($log, srt, FileSaver, $sce, $scope, videogular) {
+    constructor($log, srt, FileSaver, $sce, $scope, videogular, $mdDialog) {
         this.$log = $log;
         this.$sce = $sce;
         this.srt = srt;
@@ -7,6 +7,7 @@ export default class SubtitlesController {
         this.FileSaver = FileSaver;
         this.srtObj = {};
         this.videogular = videogular;
+        this.dialog = $mdDialog;
         this.subtitle = {
             video: 'http://static.videogular.com/assets/videos/videogular.mp4'
         };
@@ -33,6 +34,31 @@ export default class SubtitlesController {
             that.form.end = highValue;
         });
     }
+
+
+    deleteLine(ev, line) {
+
+            delete this.srtObj[0];
+
+        // var confirm = this.dialog.confirm()
+        //     .title('Would you like to delete your debt?')
+        //     .textContent('All of the banks have agreed to forgive you your debts.')
+        //     .ariaLabel('Lucky day')
+        //     .targetEvent(ev)
+        //     .ok('Please do it!')
+        //     .cancel('Sounds like a scam');
+        // this.dialog.show(confirm).then(function() {
+        //     delete this.srtObj[0];
+        // }, function() {
+        //     $scope.status = 'You decided to keep your debt.';
+        // });
+
+
+
+
+
+    }
+
 
 
     srcChanged() {
@@ -120,4 +146,4 @@ export default class SubtitlesController {
 
 }
 
-SubtitlesController.$inject = ['$log', 'srt', 'FileSaver', '$sce', '$scope', 'videogular'];
+SubtitlesController.$inject = ['$log', 'srt', 'FileSaver', '$sce', '$scope', 'videogular', '$mdDialog'];
