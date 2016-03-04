@@ -10,7 +10,6 @@
                     <label>URL voor video</label>
                     <input ng-model="vm.subtitle.video" ng-blur="vm.srcChanged()" type="text" />
                 </md-input-container>
-                <!-- <button ng-click="vm.srcChanged()">klik</button> -->
             </section>
             <rzslider rz-slider-model="vm.form.start" id="vm.key" rz-slider-high="vm.form.end" rz-slider-options="vm.slider.options"></rzslider>
             <form name="templateForm">
@@ -21,22 +20,16 @@
                         <textarea ng-model="vm.form.text" md-maxlength="150" rows="1" md-select-on-focus></textarea>
                     </md-input-container>
             </form>
-            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <md-input-container>
-                    <input ng-model="vm.form.start" ng-change="changeSlider()">
-                </md-input-container>
+            <section layout="row" layout-align="center center" layout-wrap>
                 <md-button class="md-fab" aria-label="In" ng-click="vm.setIn()">
                     < </md-button>
                         <md-button ng-click="vm.addLine(vm.form)" class="md-raised md-primary">Voeg tekst toe</md-button>
                         <md-button class="md-fab" aria-label="Out" ng-click="vm.setOut()">
                             >
                         </md-button>
-                        <md-input-container>
-                            <input ng-model="vm.form.end">
-                        </md-input-container>
             </section>
             <md-list>
-                <div ng-repeat="(key, l) in vm.srtObj" >
+                <div ng-repeat="(key, l) in vm.srtObj">
                     <subtitle-line key="key" in="l.start" out="l.end" text="l.text" total-time="vm.videogular.api.totalTime"></subtitle-line>
                     <md-button class="md-primary md-raised" ng-click="vm.deleteLine($event, key)" flex="100" flex-gt-md="auto">
                         Verwijder
